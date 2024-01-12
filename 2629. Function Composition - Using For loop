@@ -1,0 +1,40 @@
+Intuition
+
+The code seems to implement a function composition in JavaScript. 
+Function composition is a concept in functional programming where two or more functions are combined to produce a new function. 
+In this case, the compose function takes an array of functions and returns a new function that represents the composition of those functions.
+
+
+Approach
+The compose function iterates through the array of functions in reverse order and applies each function to the result of the previous one. 
+The result is a new function that applies the entire composition of functions to an input value.
+
+Complexity
+
+Time complexity: O(n)O(n)O(n), where nnn is the number of functions in the input array. 
+The function iterates through the array once.
+
+Space complexity: O(1)O(1)O(1), as the space used is constant, regardless of the number of functions.
+
+Code
+/**
+ * @param {Function[]} functions
+ * @return {Function}
+ */
+var compose = function (functions) {
+    return function (x) {
+       for (let i = functions.length - 1; i >= 0; i--) {
+           x = functions[i](x);
+       }
+       return x;
+    };
+};
+
+/**
+ * const fn = compose([x => x + 1, x => 2 * x])
+ * fn(4) // 9
+ */
+
+The example usage demonstrates how to create a composed function fn using the compose function with an array of two functions: x => x + 1 and x => 2 * x. 
+When calling fn(4), it should result in 9, as the composition is applied as (2 * (4 + 1)).
+
